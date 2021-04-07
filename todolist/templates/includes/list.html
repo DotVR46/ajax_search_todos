@@ -1,0 +1,21 @@
+{% if todos %}
+    {% for todo in todos %}
+    <div class="col bs-callout bs-callout-{% if todo.completed %}success{% else %}danger{% endif %}">
+        <div class="row justify-content-between">
+            <div class="col-4">
+                
+                <h4><a href="{{ todo.id }}">{{ todo.title }}</a></h4>
+                <p>{{ todo.description|truncatewords:5 }}</p>
+                
+            </div>
+            <div class="col-auto mt-auto mb-auto">
+                <form action="." method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="todo_id" value="{{ todo.id }}">
+                    <button type="submit" class="btn btn-outline-{% if todo.completed %}success{% else %}danger{% endif %}">{% if todo.completed %}Не выполнил{% else %}Выполнил{% endif %}</button>
+                </form>                
+            </div>
+        </div>        
+    </div>
+    {% endfor %}
+{% endif %}

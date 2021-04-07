@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Удалить?{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-8 col-lg-5">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">{{ todo.title }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Todo status: {% if todo.completed %}Completed{% else %}Not completed{% endif %}</h6>
+                    <p class="card-text">{{ todo.description }}</p>
+                    <a href="{% url "todo:update_todo" todo.id %}" class="card-link">Обновить</a>
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="todo_id" value="{{ todo.id }}">
+                        <input type="submit" value="Удалить?">
+                    </form>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+{% endblock %}
